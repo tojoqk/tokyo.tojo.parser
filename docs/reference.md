@@ -88,7 +88,7 @@
 
 Methods:
 - <code>PEEK-CHAR :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> <a href="#char-type">CHAR</a>))</code>
-- <code>READ-CHAR! :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> (<a href="#tuple-type">TUPLE</a> <a href="#char-type">CHAR</a> :A)))</code>
+- <code>READ-CHAR! :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> <a href="#char-type">CHAR</a>))</code>
 
 <details>
 <summary>Instances</summary>
