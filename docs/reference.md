@@ -81,6 +81,23 @@
 
 ## [port.lisp](https://github.com/tojoqk/tokyo.tojo.parser/tree/main/src/port.lisp) <a name="tokyo.tojo.parser/port-port-lisp-file"></a>
 
+### Types
+
+#### <code>ITERATORPORT</code> <sup><sub>[TYPE]</sub></sup><a name="iteratorport-type"></a>
+
+<details>
+<summary>Instances</summary>
+
+- <code><a href="#runtimerepr-class">RUNTIMEREPR</a> <a href="#iteratorport-type">ITERATORPORT</a></code>
+- <code><a href="#port-class">PORT</a> <a href="#iteratorport-type">ITERATORPORT</a></code>
+- <code><a href="#intoport-class">INTOPORT</a> (<a href="#iterator-type">ITERATOR</a> <a href="#char-type">CHAR</a>) <a href="#iteratorport-type">ITERATORPORT</a></code>
+- <code><a href="#intoport-class">INTOPORT</a> <a href="#string-type">STRING</a> <a href="#iteratorport-type">ITERATORPORT</a></code>
+
+</details>
+
+
+***
+
 ### Classes
 
 #### <code>PORT</code> <sup><sub>[CLASS]</sub></sup><a name="port-class"></a>
@@ -93,7 +110,7 @@ Methods:
 <details>
 <summary>Instances</summary>
 
-- <code><a href="#port-class">PORT</a> <a href="#iterport-type">ITERPORT</a></code>
+- <code><a href="#port-class">PORT</a> <a href="#iteratorport-type">ITERATORPORT</a></code>
 
 </details>
 
@@ -109,8 +126,8 @@ Methods:
 <details>
 <summary>Instances</summary>
 
-- <code><a href="#intoport-class">INTOPORT</a> <a href="#string-type">STRING</a> <a href="#iterport-type">ITERPORT</a></code>
-- <code><a href="#intoport-class">INTOPORT</a> (<a href="#iterator-type">ITERATOR</a> <a href="#char-type">CHAR</a>) <a href="#iterport-type">ITERPORT</a></code>
+- <code><a href="#intoport-class">INTOPORT</a> <a href="#string-type">STRING</a> <a href="#iteratorport-type">ITERATORPORT</a></code>
+- <code><a href="#intoport-class">INTOPORT</a> (<a href="#iterator-type">ITERATOR</a> <a href="#char-type">CHAR</a>) <a href="#iteratorport-type">ITERATORPORT</a></code>
 
 </details>
 

@@ -10,7 +10,9 @@
            #:read-char!
 
            #:IntoPort
-           #:into-port!))
+           #:into-port!
+
+           #:IteratorPort))
 
 (in-package #:tokyo.tojo.parser/port)
 
@@ -24,9 +26,9 @@
   (define-class (Port :p => IntoPort :t :p (:t -> :p))
     (into-port! (:t -> :p)))
 
-  (define-type IterPort (%IterPort (cell:Cell (Optional Char)) (iter:Iterator Char)))
+  (define-type IteratorPort (%IterPort (cell:Cell (Optional Char)) (iter:Iterator Char)))
 
-  (define-instance (Port IterPort)
+  (define-instance (Port IteratorPort)
     (define (peek-char (%IterPort cell _))
       (match (cell:read cell)
         ((Some c) (Some c))
@@ -43,10 +45,10 @@
             (cell:write! cell None)
             (Some ch)))))))
 
-  (define-instance (IntoPort (iter:Iterator Char) IterPort)
+  (define-instance (IntoPort (iter:Iterator Char) IteratorPort)
     (define (into-port! iter)
       (%IterPort (cell:new (iter:next! iter)) iter)))
 
-  (define-instance (IntoPort String IterPort)
+  (define-instance (IntoPort String IteratorPort)
     (define (into-port! str)
       (into-port! (iter:into-iter str)))))
