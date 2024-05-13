@@ -87,8 +87,8 @@
 <code><a href="#port-class">PORT</a> :A</code>
 
 Methods:
-- <code>PEEK :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> <a href="#char-type">CHAR</a>))</code>
-- <code>READ! :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> (<a href="#tuple-type">TUPLE</a> <a href="#char-type">CHAR</a> :A)))</code>
+- <code>PEEK-CHAR :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> <a href="#char-type">CHAR</a>))</code>
+- <code>READ-CHAR! :: (:A &rarr; (<a href="#optional-type">OPTIONAL</a> (<a href="#tuple-type">TUPLE</a> <a href="#char-type">CHAR</a> :A)))</code>
 
 <details>
 <summary>Instances</summary>

@@ -5,8 +5,8 @@
   (:local-nicknames
    (#:iter #:coalton-library/iterator))
   (:export #:Port
-           #:peek
-           #:read!
+           #:peek-char
+           #:read-char!
 
            #:IntoPort
            #:into-port!))
@@ -17,8 +17,8 @@
 
 (coalton-toplevel
   (define-class (Port :p)
-    (peek (:p -> Optional Char))
-    (read! (:p -> (Optional (Tuple Char :p)))))
+    (peek-char (:p -> Optional Char))
+    (read-char! (:p -> (Optional (Tuple Char :p)))))
 
   (define-class (Port :p => IntoPort :t :p (:t -> :p))
     (into-port! (:t -> :p)))
@@ -26,11 +26,11 @@
   (define-type IterPort (%IterPort (Optional Char) (iter:Iterator Char)))
 
   (define-instance (Port IterPort)
-    (define (peek (%IterPort opt _))
+    (define (peek-char (%IterPort opt _))
       (match opt
         ((Some c) (Some c))
         ((None) None)))
-    (define (read! p)
+    (define (read-char! p)
       (match p
         ((%IterPort (None) _) None)
         ((%IterPort (Some ch) iter)

@@ -70,7 +70,7 @@
   (declare peek-char-or-eof (port:Port :p => Parser :p (Optional Char)))
   (define peek-char-or-eof
     (Parser (fn ((Tuple port streams))
-              (do (let opt-ch = (port:peek port))
+              (do (let opt-ch = (port:peek-char port))
                   (pure (Tuple3 opt-ch port streams))))))
 
   (declare peek-char (port:Port :p => Parser :p Char))
@@ -84,7 +84,7 @@
   (define read-char-or-eof
     (Parser
      (fn ((Tuple port streams))
-       (do (let opt-ch = (port:read! port))
+       (do (let opt-ch = (port:read-char! port))
            (match opt-ch
              ((Some (Tuple ch port)) (Ok (Tuple3 (Some ch) port streams)))
              ((None) (Ok (Tuple3 None port streams))))))))
@@ -93,7 +93,7 @@
   (define read-char
     (Parser
      (fn ((Tuple port streams))
-       (do (let opt-ch = (port:read! port))
+       (do (let opt-ch = (port:read-char! port))
            (match opt-ch
              ((Some (Tuple ch port)) (Ok (Tuple3 ch port streams)))
              ((None) (Err "Unexpected eof")))))))
