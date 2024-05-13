@@ -98,11 +98,10 @@
              ((Some ch) (Ok (Tuple ch streams)))
              ((None) (Err "Unexpected eof")))))))
 
-  (declare run! (port:IntoPort :s :p => Parser :p :a -> :s -> Result String :a))
-  (define (run! (Parser parse!) src)
+  (declare run! (port:Port :p => Parser :p :a -> :p -> Result String :a))
+  (define (run! (Parser parse!) port)
     (map (fn ((Tuple x _)) x)
-         (parse! (Tuple (port:into-port! src)
-                        (singleton (output:make-string-output-stream))))))
+         (parse! (Tuple port (singleton (output:make-string-output-stream))))))
 
   (declare fold-while ((:a -> :c -> Parser :p (Tuple :a (Optional :c))) -> :a -> :c -> Parser :p :a))
   (define (fold-while f acc state)

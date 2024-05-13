@@ -22,8 +22,8 @@
 
 ### Values
 
-#### <code>(RUN! (PARSER PARSE!) SRC)</code> <sup><sub>FUNCTION</sub></sup><a name="run!-value"></a>
-<code>&forall; :A :B :C. <a href="#intoport-class">INTOPORT</a> :C :A &rArr; ((<a href="#parser-type">PARSER</a> :A :B) &rarr; :C &rarr; (<a href="#result-type">RESULT</a> <a href="#string-type">STRING</a> :B))</code>
+#### <code>(RUN! (PARSER PARSE!) PORT)</code> <sup><sub>FUNCTION</sub></sup><a name="run!-value"></a>
+<code>&forall; :A :B. <a href="#port-class">PORT</a> :A &rArr; ((<a href="#parser-type">PARSER</a> :A :B) &rarr; :A &rarr; (<a href="#result-type">RESULT</a> <a href="#string-type">STRING</a> :B))</code>
 
 ***
 
