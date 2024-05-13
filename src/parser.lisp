@@ -2,7 +2,6 @@
   (:use #:coalton
         #:coalton-prelude)
   (:shadow #:error)
-  (:nicknames #:tokyo.tojo.parser)
   (:local-nicknames
    (#:cell #:coalton-library/cell)
    (#:iter #:coalton-library/iterator)

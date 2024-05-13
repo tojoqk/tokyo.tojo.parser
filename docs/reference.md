@@ -1,6 +1,6 @@
-# Package `tokyo.tojo.parser`<a name="tokyo.tojo.parser-package"></a>
+# Package `tokyo.tojo.parser/parser`<a name="tokyo.tojo.parser/parser-package"></a>
 
-## [parser.lisp](https://github.com/tojoqk/tokyo.tojo.parser/tree/main/src/parser.lisp) <a name="tokyo.tojo.parser-parser-lisp-file"></a>
+## [parser.lisp](https://github.com/tojoqk/tokyo.tojo.parser/tree/main/src/parser.lisp) <a name="tokyo.tojo.parser/parser-parser-lisp-file"></a>
 
 ### Types
 
