@@ -7,7 +7,8 @@
    (#:iter #:coalton-library/iterator)
    (#:result #:coalton-library/result)
    (#:output #:tokyo.tojo.parser/private/output-stream)
-   (#:port #:tokyo.tojo.parser/port))
+   (#:port #:tokyo.tojo.parser/port)
+   (#:iterable #:tokyo.tojo.iterable))
   (:export #:Parser
 
            #:peek-char
@@ -15,8 +16,8 @@
            #:read-char
            #:read-char-or-eof
 
-           #:fold-while
            #:do-while
+           #:do-times
 
            #:buffer-push
            #:buffer-pop
@@ -102,37 +103,47 @@
     (map (fn ((Tuple x _)) x)
          (parse! (Tuple port (singleton (output:make-string-output-stream))))))
 
-  (declare fold-while ((:a -> :c -> Parser :p (Tuple :a (Optional :c))) -> :a -> :c -> Parser :p :a))
-  (define (fold-while f acc state)
-    (Parser
-     (fn ((Tuple port streams))
-       (let acc* = (cell:new acc))
-       (let state* = (cell:new state))
-       (let streams* = (cell:new streams))
-       (loop
-         (let (Parser parse!) = (f (cell:read acc*) (cell:read state*)))
-         (match (parse! (Tuple port (cell:read streams*)))
-           ((Ok (Tuple (Tuple acc opt) streams))
-            (cell:write! streams* streams)
-            (cell:write! acc* acc)
-            (match opt
-              ((Some state)
-               (cell:write! state* state)
-               Unit)
-              ((None) (break))))
-           ((Err e) (return (Err e)))))
-       (Ok (Tuple (cell:read acc*)
-                  (cell:read streams*))))))
+  (define-instance (iterable:Iterable (Parser :p))
+    (define (iterable:iterate f state)
+      (Parser
+       (fn ((Tuple port streams))
+         (let state* = (cell:new state))
+         (let streams* = (cell:new streams))
+         (loop
+           (let (Parser parse!) = (f (cell:read state*)))
+           (match (parse! (Tuple port (cell:read streams*)))
+             ((Ok (Tuple (iterable:Continue state) streams))
+              (cell:write! streams* streams)
+              (cell:write! state* state)
+              Unit)
+             ((Ok (Tuple (iterable:Return state) streams))
+              (cell:write! streams* streams)
+              (cell:write! state* state)
+              (break))
+             ((Err e) (return (Err e)))))
+         (Ok (Tuple (cell:read state*)
+                    (cell:read streams*)))))))
 
   (declare do-while (Parser :p Boolean -> Parser :p Unit))
   (define (do-while p)
-    (fold-while (fn ((Unit) (Unit))
-                  (do (b <- p)
-                      (if b
-                          (pure (Tuple Unit (Some Unit)))
-                          (pure (Tuple Unit None)))))
-                Unit
-                Unit))
+    (iterable:iterate (fn ((Unit))
+                        (do (b <- p)
+                            (if b
+                                (pure (iterable:Continue Unit))
+                                (pure (iterable:Return Unit)))))
+                      Unit))
+
+  (declare do-times (UFix -> Parser :p Unit -> Parser :p Unit))
+  (define (do-times n p)
+    (if (== n 0)
+        (pure Unit)
+        (do (iterable:iterate (fn (k)
+                                (do p
+                                    (if (== k 0)
+                                        (pure (iterable:Return 0))
+                                        (pure (iterable:Continue (1- k))))))
+                              n)
+            (pure Unit))))
 
   ;;
   ;; String Buffer feature

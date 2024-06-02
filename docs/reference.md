@@ -9,6 +9,7 @@
 <details>
 <summary>Instances</summary>
 
+- <code><a href="#iterable-class">ITERABLE</a> (<a href="#parser-type">PARSER</a> :A)</code>
 - <code><a href="#runtimerepr-class">RUNTIMEREPR</a> (<a href="#parser-type">PARSER</a> :A :B)</code>
 - <code><a href="#monad-class">MONAD</a> (<a href="#parser-type">PARSER</a> :A)</code>
 - <code><a href="#functor-class">FUNCTOR</a> (<a href="#parser-type">PARSER</a> :A)</code>
@@ -24,6 +25,11 @@
 
 #### <code>(RUN! (PARSER PARSE!) PORT)</code> <sup><sub>FUNCTION</sub></sup><a name="run!-value"></a>
 <code>&forall; :A :B. <a href="#port-class">PORT</a> :A &rArr; ((<a href="#parser-type">PARSER</a> :A :B) &rarr; :A &rarr; (<a href="#result-type">RESULT</a> <a href="#string-type">STRING</a> :B))</code>
+
+***
+
+#### <code>(DO-TIMES N P)</code> <sup><sub>FUNCTION</sub></sup><a name="do-times-value"></a>
+<code>&forall; :A. (<a href="#ufix-type">UFIX</a> &rarr; (<a href="#parser-type">PARSER</a> :A <a href="#unit-type">UNIT</a>) &rarr; (<a href="#parser-type">PARSER</a> :A <a href="#unit-type">UNIT</a>))</code>
 
 ***
 
@@ -44,11 +50,6 @@
 
 #### <code>BUFFER-POP</code> <sup><sub>[VALUE]</sub></sup><a name="buffer-pop-value"></a>
 <code>&forall; :A. (<a href="#parser-type">PARSER</a> :A <a href="#string-type">STRING</a>)</code>
-
-***
-
-#### <code>(FOLD-WHILE F ACC STATE)</code> <sup><sub>FUNCTION</sub></sup><a name="fold-while-value"></a>
-<code>&forall; :A :B :C. ((:A &rarr; :B &rarr; (<a href="#parser-type">PARSER</a> :C (<a href="#tuple-type">TUPLE</a> :A (<a href="#optional-type">OPTIONAL</a> :B)))) &rarr; :A &rarr; :B &rarr; (<a href="#parser-type">PARSER</a> :C :A))</code>
 
 ***
 
